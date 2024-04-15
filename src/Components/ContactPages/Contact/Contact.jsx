@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
 
 const Contact = () => {
-  return (
-    <div>Contact</div>
-  )
-}
+	return (
+		<div>
+			<button className="btn btn-secondary form-control">Contact</button>
+		</div>
+	);
+};
 
-export default Contact
+export default Contact;

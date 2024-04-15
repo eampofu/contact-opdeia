@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
 
 const GeneralContact = () => {
-  return (
-    <div>GeneralContact</div>
-  )
-}
+	return (
+		<div>
+			{" "}
+			<button className="btn btn-secondary form-control">General Contact</button>
+		</div>
+	);
+};
 
-export default GeneralContact
+export default GeneralContact;
