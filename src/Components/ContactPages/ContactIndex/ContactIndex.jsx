@@ -51,6 +51,10 @@ class ContactIndex extends React.Component {
 		};
 	}
 
+	handleAddContact = () => {
+		alert("h");
+	};
+
 	render() {
 		return (
 			<div>
@@ -66,7 +70,7 @@ class ContactIndex extends React.Component {
 						</div>
 						<div className="row py-2">
 							<div className="col-8 offset-2 row">
-								<AddContact />
+								<AddContact handleAddContact={this.handleAddContact} />
 							</div>
 						</div>
 						<div className="row py-4">
