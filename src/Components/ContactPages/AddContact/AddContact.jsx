@@ -5,7 +5,7 @@ class AddContact extends React.Component {
 		super(props);
 		this.state = {
 			errorMeassage: undefined,
-			sucessMessage: undefined,
+			successMessage: undefined,
 		};
 	}
 
@@ -15,12 +15,27 @@ class AddContact extends React.Component {
 		const email = e.target.elements.contactEmail.value.trim();
 		const phone = e.target.elements.contactPhone.value.trim();
 
-		this.props.handleAddContact({ name: name, email: email, phone: phone });
+		const response = this.props.handleAddContact({
+			name: name,
+			email: email,
+			phone: phone,
+		});
+		if (response.status == "success") {
+			this.setState({ errorMeassage: undefined, successMessage: response.msg });
+			document.querySelector(".contact-form").reset();
+			console.log(response);
+		} else {
+			this.setState({ errorMeassage: response.msg, successMessage: undefined });
+			console.log(response);
+		}
 	};
 	render() {
 		return (
 			<div className="border col-12 text-white p-2">
-				<form onSubmit={this.handleAddContactFormSubmit}>
+				<form
+					onSubmit={this.handleAddContactFormSubmit}
+					className="contact-form"
+				>
 					<div className="row p-12">
 						<div className="col-12 text-white-50"> Add new Contact</div>
 						<div className="col-12 col-md-4 p-1">
