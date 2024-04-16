@@ -50,7 +50,7 @@ class ContactIndex extends React.Component {
 			],
 		};
 	}
-
+	// to add a new contact
 	handleAddContact = (newContact) => {
 		if (newContact.name == "") {
 			return { status: "failure", msg: "Please Enter a valid Name" };
@@ -77,7 +77,19 @@ class ContactIndex extends React.Component {
 			return { status: "success", msg: "Contact was added successfully" };
 		}
 	};
-
+	// to toggle foavourites
+	handleToggleFavourite = (contact) => {
+		this.setState((prevState) => {
+			return {
+				contactList: prevState.contactList.map((obj) => {
+					if (obj.id == contact.id) {
+						return { ...obj, isFavourite: !obj.isFavourite };
+					}
+					return obj;
+				}),
+			};
+		});
+	};
 	render() {
 		return (
 			<div>
@@ -102,6 +114,7 @@ class ContactIndex extends React.Component {
 									contacts={this.state.contactList.filter(
 										(u) => u.isFavourite == true
 									)}
+									favouriteClick={this.handleToggleFavourite}
 								/>
 							</div>
 						</div>
@@ -111,6 +124,7 @@ class ContactIndex extends React.Component {
 									contacts={this.state.contactList.filter(
 										(u) => u.isFavourite == false
 									)}
+									favouriteClick={this.handleToggleFavourite}
 								/>
 							</div>
 						</div>
