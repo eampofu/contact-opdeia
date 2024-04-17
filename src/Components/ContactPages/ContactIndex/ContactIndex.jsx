@@ -90,6 +90,18 @@ class ContactIndex extends React.Component {
 			};
 		});
 	};
+
+	// delete contact
+	handleDeleteContact = (contactId) => {
+		this.setState((prevState) => {
+			return {
+				contactList: prevState.contactList.filter((obj) => {
+					
+					return obj.id !==contactId;
+				}),
+			};
+		});
+	};
 	render() {
 		return (
 			<div>
@@ -115,6 +127,7 @@ class ContactIndex extends React.Component {
 										(u) => u.isFavourite == true
 									)}
 									favouriteClick={this.handleToggleFavourite}
+									deleteContact={this.handleDeleteContact}
 								/>
 							</div>
 						</div>
@@ -125,6 +138,7 @@ class ContactIndex extends React.Component {
 										(u) => u.isFavourite == false
 									)}
 									favouriteClick={this.handleToggleFavourite}
+									deleteContact={this.handleDeleteContact}
 								/>
 							</div>
 						</div>
