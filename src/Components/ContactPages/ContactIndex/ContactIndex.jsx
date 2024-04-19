@@ -77,6 +77,12 @@ class ContactIndex extends React.Component {
 			return { status: "success", msg: "Contact was added successfully" };
 		}
 	};
+	// to reemove all contact
+	handleRemoveAllContact = () => {
+		this.setState((prevState) => {
+			return { contactList: [] };
+		});
+	};
 	// to toggle foavourites
 	handleToggleFavourite = (contact) => {
 		this.setState((prevState) => {
@@ -104,7 +110,6 @@ class ContactIndex extends React.Component {
 
 	// add random
 	handleRandomContact = (newContact) => {
-		
 		const newFinalContact = {
 			...newContact,
 			id: this.state.contactList[this.state.contactList.length - 1].id + 1,
@@ -129,7 +134,9 @@ class ContactIndex extends React.Component {
 						</div>
 
 						<div className="col-4 row">
-							<RemoveAllContact />
+							<RemoveAllContact
+								handleRemoveAllContact={this.handleRemoveAllContact}
+							/>
 						</div>
 						<div className="row py-2">
 							<div className="col-8 offset-2 row">
