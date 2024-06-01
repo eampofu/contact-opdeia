@@ -8,21 +8,31 @@ class AddContact extends React.Component {
 			successMessage: undefined,
 		};
 	}
-handleCancel=()=>{
-	this.props.cancelUpdateContact();
-	
-}
+	handleCancel = () => {
+		this.props.cancelUpdateContact();
+	};
 	handleAddContactFormSubmit = (e) => {
 		e.preventDefault();
 		const name = e.target.elements.contactName.value.trim();
 		const email = e.target.elements.contactEmail.value.trim();
 		const phone = e.target.elements.contactPhone.value.trim();
-
-		const response = this.props.handleAddContact({
-			name: name,
-			email: email,
-			phone: phone,
-		});
+		const id = e.target.elements.contactId.value.trim();
+		console.log(id);
+		let response = undefined;
+		if (this.props.isUpdating) {
+			response = this.props.handleUpdateContact({
+				name: name,
+				email: email,
+				phone: phone,
+				id: id,
+			});
+		} else {
+			response = this.props.handleAddContact({
+				name: name,
+				email: email,
+				phone: phone,
+			});
+		}
 		if (response.status == "success") {
 			this.setState({ errorMessage: undefined, successMessage: response.msg });
 			document.querySelector(".contact-form").reset();
@@ -39,6 +49,14 @@ handleCancel=()=>{
 					onSubmit={this.handleAddContactFormSubmit}
 					className="contact-form"
 				>
+					<input
+						hidden
+						name="contactId"
+						defaultValue={
+							this.props.isUpdating ? this.props.selectedContact.id : ""
+						}
+					></input>
+
 					<div className="row p-12">
 						<div className="col-12 text-white-50">
 							{this.props.isUpdating ? " Update Contact" : "Add new Contact"}
@@ -101,7 +119,10 @@ handleCancel=()=>{
 						</div>
 						<div className="col-12 p-1 col-md-4">
 							{this.props.isUpdating && (
-								<button className="btn btn-secondary form-control btn-sm" onClick={this.handleCancel}>
+								<button
+									className="btn btn-secondary form-control btn-sm"
+									onClick={this.handleCancel}
+								>
 									Cancel
 								</button>
 							)}
