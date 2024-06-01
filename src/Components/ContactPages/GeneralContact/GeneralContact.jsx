@@ -15,6 +15,7 @@ const GeneralContact = (props) => {
 						key={index}
 						favouriteClick={props.favouriteClick}
 						deleteContact={props.deleteContact}
+						updateClick={props.updateClick}
 					></Contact>
 				))}
 			</div>

@@ -48,6 +48,8 @@ class ContactIndex extends React.Component {
 					isFavourite: false,
 				},
 			],
+			selectedContact: undefined,
+			isUpdating: false,
 		};
 	}
 	// to add a new contact
@@ -121,6 +123,16 @@ class ContactIndex extends React.Component {
 			};
 		});
 	};
+
+	handleUpdateClick = (contact) => {
+		console.log(contact);
+		this.setState((prevState) => {
+			return {
+				selectedContact: contact,
+				isUpdating: true,
+			};
+		});
+	};
 	render() {
 		return (
 			<div>
@@ -140,7 +152,11 @@ class ContactIndex extends React.Component {
 						</div>
 						<div className="row py-2">
 							<div className="col-8 offset-2 row">
-								<AddContact handleAddContact={this.handleAddContact} />
+								<AddContact
+									isUpdating={this.state.isUpdating}
+									selectedContact={this.state.selectedContact}
+									handleAddContact={this.handleAddContact}
+								/>
 							</div>
 						</div>
 						<div className="row py-4">
@@ -151,6 +167,7 @@ class ContactIndex extends React.Component {
 									)}
 									favouriteClick={this.handleToggleFavourite}
 									deleteContact={this.handleDeleteContact}
+									updateClick={this.handleUpdateClick}
 								/>
 							</div>
 						</div>
@@ -162,6 +179,7 @@ class ContactIndex extends React.Component {
 									)}
 									favouriteClick={this.handleToggleFavourite}
 									deleteContact={this.handleDeleteContact}
+									updateClick={this.handleUpdateClick}
 								/>
 							</div>
 						</div>
